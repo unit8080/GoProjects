@@ -26,17 +26,17 @@ func insert(aNode *Node, x int) *Node {
 
     for curr != head {
         if prev.Val <= x && x <= curr.Val {
-            // 2, 3,    5, 1 insert 5
+            // [2, 3,    5, 1] insert 5 => [2, 3, 5  5, 1]
             newNode.Next = curr
             prev.Next = newNode
             return head
         } else if prev.Val > curr.Val && x < curr.Val {
-            // 2, 3, 5 , 1 insert 0
+            // [2, 3, 5,   1] insert 0 => [2, 3, 5  0, 1]
             newNode.Next = curr
             prev.Next = newNode
             return head
         } else if prev.Val > curr.Val && x > prev.Val {
-            // []2, 3, 5, 1], insert  6
+            // [2, 3, 5,  1] insert 6 => [2, 3, 5  6, 1]
             newNode.Next = curr
             prev.Next = newNode
             return head
