@@ -10,36 +10,41 @@
  */
 
 func insert(aNode *Node, x int) *Node {
+    
     newNode := new(Node)
     newNode.Val = x
+    head := aNode
+
     if head == nil {
         head = newNode
         head.Next = head
         return head
     }
-    head := aNode
-    node := head
-    for node.Next != head {
-        next := node.Next
-        if node.Val <= x && x <= next.Val {
-            node.Next = newNode
-            newNode.Next = next
-            return head
-        } else if node.Val > x && next.Val < node.Val && x < next.Val {
 
-            node.Next = newNode
-            newNode.Next = next
+    prev := head
+    curr := head.Next
+
+    for curr != head {
+        if prev.Val <= x && x <= curr.Val {
+            newNode.Next = curr
+            prev.Next = newNode
             return head
-        } else if node.Val <= x && node.Val > next.Val && x >= next.Val {
-            node.Next = newNode
-            newNode.Next = next
+        } else if prev.Val > curr.Val && x < curr.Val {
+            // 2, 3, 5 , 1 insert 0
+            newNode.Next = curr
+            prev.Next = newNode
+            return head
+        } else if prev.Val > curr.Val && x >= prev.Val {
+            // []2, 3, 5, 1], insert 5 or 6
+            newNode.Next = curr
+            prev.Next = newNode
             return head
         }
-        node = node.Next
+        prev = curr
+        curr = curr.Next
     }
-
-    newNode.Next = node.Next
-    node.Next = newNode
+    newNode.Next = curr
+    prev.Next = newNode
     return head
 }
 
