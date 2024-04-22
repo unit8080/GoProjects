@@ -34,7 +34,7 @@ func insert(aNode *Node, x int) *Node {
             newNode.Next = curr
             prev.Next = newNode
             return head
-        } else if prev.Val > curr.Val && x >= prev.Val {
+        } else if prev.Val > curr.Val && x > prev.Val {
             // []2, 3, 5, 1], insert 5 or 6
             newNode.Next = curr
             prev.Next = newNode
