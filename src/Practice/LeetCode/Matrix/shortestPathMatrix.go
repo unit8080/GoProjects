@@ -10,6 +10,11 @@ func shortestPathBinaryMatrix(grid [][]int) int {
         return -1
     }
 
+    // construct 2-D matrix
+    visited := make([][]bool, m)
+    for i := range visited {
+        visited[i] = make([]bool, n)
+    }
     queue := [][]int{{0,0}} // enqueue start cell
     grid[0][0] = 1 // set distance from start
 
