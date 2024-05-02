@@ -32,6 +32,9 @@ func (set Set) Exists(data interface{}) bool {
 	_, exists := set[data]
 	return exists
 }
+func (set Set) Len() int {
+	return len(set)
+}
 func (set Set) Print() {
 	for v := range set {
 		fmt.Println(v)
@@ -49,4 +52,5 @@ func main() {
 	fmt.Println(set.Exists(4))
 	fmt.Println(set.Exists(10))
 	fmt.Println(set.Exists("bad"))
+	fmt.Println("len:", set.Len())
 }
