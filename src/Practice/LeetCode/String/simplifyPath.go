@@ -21,6 +21,9 @@ func simplifyPath(path string) string {
     var strs []string
     strs = strings.Split(path, "/")
 
+    // split into array of strings
+    // then process "." and ".."
+    // else push onto stack
     for _, str := range strs {
         if str == "" || str == "." {
             continue

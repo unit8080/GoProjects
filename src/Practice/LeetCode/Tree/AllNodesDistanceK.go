@@ -24,7 +24,7 @@ func distanceK(root *TreeNode, target *TreeNode, k int) []int {
         if curr.Left != nil {
             buildGraph(curr.Left, curr)
         }
-        if root.Right != nil {
+        if curr.Right != nil {
             buildGraph(curr.Right, curr)
         }
     }

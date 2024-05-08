@@ -18,9 +18,17 @@ func Constructor(nums []int) SparseVector {
 
 // Return the dotProduct of two sparse vectors
 func (this *SparseVector) dotProduct(vec SparseVector) int {
-    s1Map := (*this).nonZeros
-    s2Map := vec.nonZeros
+    var s1Map map[int]int
+    var s2Map map[int]int
 
+    // optimization
+    if len(vec.nonZeros) < len((*this).nonZeros) {
+        s1Map = vec.nonZeros
+        s2Map = (*this).nonZeros
+    } else {
+        s1Map = (*this).nonZeros
+        s2Map = vec.nonZeros
+    }
     total := 0
     for key, val := range s1Map {
         if val2, exists := s2Map[key]; exists {
