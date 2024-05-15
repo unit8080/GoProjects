@@ -1,3 +1,6 @@
+// 283. Move Zeroes
+// https://leetcode.com/problems/move-zeroes/
+
 /*
 Move Zeroes
 
@@ -24,37 +27,32 @@ Follow up: Could you minimize the total number of operations done?
 
 /*
 Algorithm:
-  - use two pointers.
-  - one for traversing and reading zeros
-  - another for writing the non-zero number
-  - at the end, write remaing write index with zero
+    - use two pointers.
+    - one for traversing and looking for zeros - rdIdx
+    - another for writing the non-zero number  - wrIdx
+    - at the end, write remaing write indexes upto size-1 with zero
 */
-package main
+func moveZeroes(nums []int)  {
+    size := len(nums)
+    if size < 2 {return}
 
-func moveZeroes(nums []int) {
+    rdIdx := 0
+    wrIdx := 0
 
-	size := len(nums)
-	if size < 2 {
-		return
-	}
-
-	rIdx := 0
-	wIdx := 0
-
-	for rIdx < size {
-		if nums[rIdx] == 0 {
-			//skip
-
-		} else {
-			if rIdx != wIdx {
-				nums[wIdx] = nums[rIdx]
-			}
-			wIdx++
-		}
-		rIdx++
-	}
-	for wIdx < size {
-		nums[wIdx] = 0
-		wIdx++
-	}
+    for rdIdx < size {
+        if nums[rdIdx] == 0 {
+            //skip - do nothing
+            rdIdx++
+        } else {
+            if rdIdx != wrIdx { // shift non-zero num
+                nums[wrIdx] = nums[rdIdx]
+            }
+            wrIdx++
+            rdIdx++
+        }
+    }
+    for wrIdx < size { // some left over to fill zeros
+        nums[wrIdx] = 0
+        wrIdx++
+    }
 }
