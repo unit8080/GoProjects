@@ -1,5 +1,7 @@
 // 2595. Number of Even and Odd Bits
 // https://leetcode.com/problems/number-of-even-and-odd-bits/
+// AAAAAAA
+// 555555
 
 func evenOddBit(n int) []int {
     fmt.Println(strconv.IntSize)
