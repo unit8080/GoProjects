@@ -2,6 +2,7 @@
 // https://leetcode.com/problems/all-paths-from-source-to-target/
 
 func dfs(vertex interface{}, Adj *map[interface{}][]interface{},
+
 	visited *map[interface{}]struct{}, ans *[][]int,
 	list *[]int) {
 
