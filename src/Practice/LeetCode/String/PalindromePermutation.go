@@ -13,3 +13,16 @@ func canPermutePalindrome(s string) bool {
     }
     return len(charMap) == 0 || (len(charMap) == 1 && len(s) % 2 == 1)
 }
+
+func canPermutePalindrome(s string) bool {
+    charMap := make(map[rune]struct{})
+    for _, ch := range s {
+
+        if _, ok := charMap[ch]; ok {
+            delete(charMap, ch)
+        } else {
+            charMap[ch] = struct{}{}
+        }
+    }
+    return len(charMap) == 0 || (len(charMap) == 1 && len(s) % 2 == 1)
+}

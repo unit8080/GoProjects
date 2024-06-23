@@ -1,3 +1,6 @@
+// 158. Read N Characters Given read4 II - Call Multiple Times
+// https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/
+
 /**
  * The read4 API is already defined for you.
  *
@@ -16,8 +19,8 @@ var solution = func(read4 func([]byte) int) func([]byte, int) int {
     var data []byte
 
     return func(buf []byte, n int) int {
-        b := make([]byte, 4)
         
+        b := make([]byte, 4)
         for len(data) < n {
             c := read4(b)
             if c == 0 {
@@ -26,12 +29,10 @@ var solution = func(read4 func([]byte) int) func([]byte, int) int {
             
             data = append(data, b[:c]...)
         }
-        
-        c := min(len(data), n)
-        copy(buf, data[:c])
-        data = data[c:]
-
-        return c
+        count := min(len(data), n)
+        copy(buf, data[:count])
+        data = data[count:]
+        return count
     }
 }
 
