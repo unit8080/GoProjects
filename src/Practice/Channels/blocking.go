@@ -16,7 +16,7 @@ func main() {
 		wg.Add(1)
 
 		go func() {
-			ch <- true
+			ch <- true // blocking other goroutines to change var "counter"
 			counter++
 			<-ch
 			fmt.Println(counter)

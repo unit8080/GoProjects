@@ -20,14 +20,14 @@ var solution = func(read4 func([]byte) int) func([]byte, int) int {
 
     return func(buf []byte, n int) int {
         
-        b := make([]byte, 4)
+        buf4 := make([]byte, 4)
         for len(data) < n {
-            c := read4(b)
+            c := read4(buf4)
             if c == 0 {
                 break
             }
             
-            data = append(data, b[:c]...)
+            data = append(data, buf4[:c]...)
         }
         count := min(len(data), n)
         copy(buf, data[:count])
