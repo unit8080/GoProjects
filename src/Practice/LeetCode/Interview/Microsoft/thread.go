@@ -11,6 +11,8 @@ func main() {
 	var wg sync.WaitGroup
 
 	ch := make(chan int) // synchronizing who even or odd
+	defer close(ch)
+
 	input := 100
 
 	for i := 0; i < 2; i++ {
