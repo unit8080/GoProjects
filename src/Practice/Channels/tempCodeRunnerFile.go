@@ -1,1 +1,1 @@
-	// go fanOutFanIn(&wg)
+close(ch)
