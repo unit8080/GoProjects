@@ -16,6 +16,24 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 //     return maxProfit
 // }
 
+
+func maxProfit(prices []int) int {
+    buy := prices[0]
+    profit := 0
+    i := 1
+    for i < len(prices) {
+        sell := prices[i]
+        if sell > buy {
+            profit = max(profit, sell - buy)
+        }
+        if buy > prices[i] {
+            buy = prices[i]
+        }
+        i++
+    }
+    return profit
+}
+
 func maxProfit(prices []int) int {
 
     n := len(prices)

@@ -32,6 +32,28 @@ Algorithm:
     - another for writing the non-zero number  - wrIdx
     - at the end, write remaing write indexes upto size-1 with zero
 */
+
+func moveZeroes(nums []int)  {
+    rdIdx := 0
+    wrIdx := 0
+
+    for rdIdx < len(nums) {
+
+        if nums[rdIdx] != 0 {
+            nums[wrIdx] = nums[rdIdx]
+            wrIdx++
+            rdIdx++
+        } else {
+            rdIdx++
+        }
+    }
+    for wrIdx < len(nums) {
+        nums[wrIdx] = 0
+        wrIdx++
+    }
+}
+
+
 func moveZeroes(nums []int)  {
     size := len(nums)
     if size < 2 {return}
