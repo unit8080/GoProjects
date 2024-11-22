@@ -41,3 +41,23 @@ func isAnagram(s string, t string) bool {
     }
 }
 
+func isAnagram(s string, t string) bool {
+    var char  [26]int
+
+    for i := 0; i < len(s); i++ {
+        index := int(s[i] - byte('a'))
+        char[index]++
+    }
+
+    for i := 0; i < len(t); i++ {
+        index := int(t[i] - byte('a'))
+        char[index]--
+    }
+    for i := 0; i < 26; i++ {
+        if char[i] != 0 {
+            return false
+        }
+    }
+    return true
+}
+

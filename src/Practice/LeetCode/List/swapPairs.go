@@ -1,6 +1,24 @@
 // 24. Swap Nodes in Pairs
 // https://leetcode.com/problems/swap-nodes-in-pairs/
 
+// Using recussion:
+
+func swapPairs(head *ListNode) *ListNode {
+
+    if head == nil || head.Next == nil {
+        return head
+    }
+    // a := head
+    // b := head.Next
+    c := head.Next.Next
+
+    temp := head.Next
+    head.Next = swapPairs(c)
+    temp.Next = head
+
+    return temp
+}
+
 func swapPairs(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
