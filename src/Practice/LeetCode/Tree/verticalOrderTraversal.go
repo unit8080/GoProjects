@@ -23,7 +23,7 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
-type Node struct {
+type NodeCol struct {
 	node *TreeNode
 	col  int
 }
@@ -40,11 +40,11 @@ func verticalTraversal(root *TreeNode) [][]int {
 	}
 
 	// key : col, val : slice of struct{level, val}
-	colmap := make(map[int][]LevelVal)
+	colMap := make(map[int][]LevelVal)
 
-	queue := make([]Node, 0)
-	queue = append(queue, Node{root, 0})
-	row := 0
+	queue := make([]NodeCol, 0)
+	queue = append(queue, NodeCol{root, 0})
+	level := 0
 	for len(queue) > 0 {
 
 		qsize := len(queue)
@@ -54,24 +54,24 @@ func verticalTraversal(root *TreeNode) [][]int {
 
 			col := item.col
 			node := item.node
-			colmap[col] = append(colmap[col], LevelVal{row, node.Val})
+			colMap[col] = append(colMap[col], LevelVal{level, node.Val})
 
 			if node.Left != nil {
 				lCol := col - 1
-				queue = append(queue, Node{node.Left, lCol})
+				queue = append(queue, NodeCol{node.Left, lCol})
 			}
 			if node.Right != nil {
 				rCol := col + 1
-				queue = append(queue, Node{node.Right, rCol})
+				queue = append(queue, NodeCol{node.Right, rCol})
 			}
 			qsize -= 1
 		}
-		row++
+		level++
 	}
 
 	// sort by column i.e. -2, -1, 0, 1, 2, ..
-	cols := make([]int, 0, len(colmap))
-	for col := range colmap {
+	cols := make([]int, 0, len(colMap))
+	for col := range colMap {
 		cols = append(cols, col)
 	}
 
@@ -81,7 +81,7 @@ func verticalTraversal(root *TreeNode) [][]int {
 		col := cols[i]
 
 		// Now Sort by level then sort by Value for same level
-		colSlice := colmap[col]
+		colSlice := colMap[col]
 		sort.SliceStable(colSlice, func(i, j int) bool {
 			if colSlice[i].level != colSlice[j].level {
 				return colSlice[i].level < colSlice[j].level

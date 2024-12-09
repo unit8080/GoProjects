@@ -98,6 +98,35 @@ func NewQueue() *Queue {
 // bool: The return type of the method is bool, indicating that this function
 // returns a boolean value, true if the queue is empty and false otherwise.
 
+/*
+q.head.Load() and q.tail.Load(): These calls use the Load method of the 
+atomic.Pointer type to atomically retrieve the current value of head and tail 
+respectively. q.head.Load() fetches the current pointer to the front node of 
+the queue, and q.tail.Load() fetches the current pointer to the rear node of the queue.
+
+==: This operator compares the pointers retrieved from head and tail. If these 
+pointers are equal, it suggests a specific condition about the state of the queue.
+
+Evaluation of Queue Emptiness
+When q.head.Load() == q.tail.Load() evaluates to true, it indicates that both head 
+and tail point to the same node. Given that we initialize the queue with both head 
+and tail pointing to a dummy node, and that both pointers only move forward through 
+nodes that are added to the queue:
+
+If head equals tail, and since operations ensure tail only moves to new nodes added 
+after the dummy node, this condition suggests no nodes have been added beyond the 
+dummy node, or all nodes added have been removed, leaving the head and tail to 
+converge back at the dummy node or another synchronizing point in their progression.
+Thus, the method returns true if the queue is empty (no accessible elements between 
+head and tail, except the dummy), and false otherwise.
+
+Summary
+The IsEmpty method is an atomic, thread-safe way to check if the queue is empty 
+without locking, by simply comparing the atomic pointers for the head and tail 
+of the queue. This approach is efficient and avoids the complications and overhead 
+of locking mechanisms in concurrent environments.
+*/
+
 func (q *Queue) IsEmpty() bool {
 	return q.head.Load() == q.tail.Load()
 }

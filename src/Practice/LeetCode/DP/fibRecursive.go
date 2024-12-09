@@ -1,4 +1,4 @@
-// Fibnacci - recursive with overlap subproblems
+// Fibnacci - recursive with duplicate overlap subproblems
 
 package main
 
